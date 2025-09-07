@@ -1,0 +1,35 @@
+# Archivos temporales
+*.swp
+*.tmp
+*.bak
+*.log
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de compilación
+*.o
+*.out
+*.class
+*.so
+*.a
+
+# Archivos de entorno
+.env
+*.lock
+
+# Archivos de respaldo
+*.old
+*.orig
+
+# Carpetas comunes
+__pycache__/
+node_modules/
+build/
+dist/
+
+# Archivos de editor
+.vscode/
+.idea/
+*.kate-swp
