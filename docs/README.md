@@ -13,3 +13,28 @@
 
 ## 🧱 Estructura del proyecto
 
+~/StryxOS/
+├── branding/
+│   ├── mascot/           # Ilustraciones y versiones de Lumo
+│   ├── backgrounds/      # Login, escritorio, splash
+│   └── ascii/            # Arte para Fastfetch, terminal, etc.
+├── installer/
+│   ├── calamares/        # Configuración y temas
+│   └── plymouth/         # Splash de arranque
+├── system/
+│   ├── packages/         # Lista de paquetes base
+│   ├── scripts/          # Automatización de instalación
+│   └── configs/          # Archivos de configuración (KDE, SDDM, etc.)
+├── docs/
+│   ├── README.md         # Documentación principal
+│   ├── changelog.md      # Registro de cambios
+│   └── backup-strategy.md # Estrategia de respaldo
+└── iso/
+    └── build/            # Archivos para generar la ISO final
+
+## 🤝 Cómo contribuir
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/jaromero74/StryxOS.git
+   cd StryxOS
