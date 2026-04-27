@@ -1,15 +1,17 @@
 # StryxOS 🦉
 
-**StryxOS** es una distribución Linux basada en Debian 13 con entorno KDE, diseñada para ofrecer una experiencia visualmente coherente, accesible y elegante. Inspirada en la sabiduría y el estilo de su mascota oficial, **Lumo**, StryxOS combina eficiencia técnica con identidad gráfica.
+Desde Panamá para el mundo Open Source.
+StryxOS es una distro basada en Debian 13 con KDE Plasma SDDM, el propósito de mi proyecto es el de ofrecerle una distro sencilla de manejar sin tantas complicaciones para los usuarios principiantes sobre todo y también para los usuarios intermedios. En StryxOS no encontrarán software innecesario que termina abrumando al usuario. La idea es que aprendan con confianza. Inspirada en la sabiduría y el estilo de su mascota oficial, **Lumo**, StryxOS combina eficiencia técnica con identidad gráfica.
+
 
 ## ✨ Características principales
 
 - 🔹 Basado en Debian 13 minimalista
-- 🔹 Entorno KDE personalizado con temas, íconos y fondos únicos
+- 🔹 Entorno KDE Plasma SDDM, interfaz moderna y familiar para quien viene de Windows
 - 🔹 Integración de arte ASCII en terminal con Fastfetch
 - 🔹 Instalador gráfico Calamares tematizado
 - 🔹 Splash de arranque con branding propio (Plymouth)
-- 🔹 Documentación clara y estructura modular para desarrolladores
+- 🔹 Ideal para usuarios que tienen el primer contacto con Linux sin tantas complicaciones      y también para revitalizar o dar una segunda oportunidad a equipos que no reúnen los       requisitos de hardware para los sistemas operativos a partir de Windows 11.
 
 ## 🧱 Estructura del proyecto
 
