@@ -1,0 +1,10 @@
+// === StryxOS Bootsplash ===
+
+bg = Image("background.png");
+screen_width  = Window.GetWidth();
+screen_height = Window.GetHeight();
+bg_scaled = bg.Scale(screen_width, screen_height);
+bg_sprite = Sprite(bg_scaled);
+bg_sprite.SetX(0);
+bg_sprite.SetY(0);
+bg_sprite.SetZ(-100);

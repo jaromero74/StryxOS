@@ -1,0 +1,117 @@
+# ══════════════════════════════════════════════════
+#  StryxOS — Tema GRUB
+#  Resolución: 1024x768
+#  Paleta: oscuro / azul / morado
+# ══════════════════════════════════════════════════
+
+# ── Fondo ─────────────────────────────────────────
+# Coloque su wallpaper en la misma carpeta del tema
+# y asegúrese de que se llame exactamente: background.png
+# Dimensiones recomendadas: 1024x768 px
+desktop-image: "background.png"
+
+# Color de fondo de respaldo (si no carga la imagen)
+desktop-color: "#0d0d1a"
+
+# ── Tipografía ────────────────────────────────────
+# Genere estas fuentes con:
+#   grub-mkfont -s 40 -o /boot/grub/themes/stryxos/regular.pf2 \
+#     /usr/share/fonts/truetype/dejavu/DejaVuExtra.ttf
+#   grub-mkfont -s 40 -o /boot/grub/themes/stryxos/regular.pf2 \
+#     /usr/share/fonts/truetype/dejavu/DejaVuExtra.ttf
+title-text: ""
+message-font: "regular"
+terminal-font: "regular"
+
+
+# ══════════════════════════════════════════════════
+#  MENÚ DE ENTRADAS
+# ══════════════════════════════════════════════════
++ boot_menu {
+    left              = 50%-220
+    top               = 220
+    width             = 440
+    height            = 300
+
+    # ── Espaciado ─────────────────────────────────
+    item_height       = 48
+    item_padding      = 8
+    item_spacing      = 4
+    margin            = 12
+
+    # ── Fuentes ───────────────────────────────────
+    item_font         = "regular"
+    selected_item_font= "regular"
+
+    # ── Colores de texto ──────────────────────────
+    # Entrada normal
+    item_color        = "#8899bb"
+    # Entrada seleccionada
+    selected_item_color = "#ffffff"
+
+    # ── Fondo del menú ────────────────────────────
+    # Rectángulo semitransparente oscuro
+    menu_pixmap_style = "menu_bg_*.png"
+
+    # ── Resaltado de la entrada activa ────────────
+    selected_item_pixmap_style = "select_*.png"
+
+    # ── Barra de scroll (por si hay muchas entradas)
+    scrollbar         = true
+    scrollbar_width   = 8
+    scrollbar_thumb   = "scrollbar_thumb.png"
+    scrollbar_frame   = "scrollbar_frame.png"
+}
+
+
+# ══════════════════════════════════════════════════
+#  BARRA DE PROGRESO (countdown / timeout)
+# ══════════════════════════════════════════════════
++ progress_bar {
+    id                = "__timeout__"
+    left              = 50%-180
+    top               = 540
+    width             = 360
+    height            = 8
+
+    # Colores sólidos (no requieren imágenes externas)
+    bar_style         = "progress_bar_*.png"
+    highlight_style   = "progress_bar_hl_*.png"
+
+    font              = "small"
+    text_color        = "#556688"
+    # Texto que muestra la cuenta regresiva
+    text              = "Iniciando en @timeout_duration@ segundos"
+}
+
+
+# ══════════════════════════════════════════════════
+#  MENSAJE DE BIENVENIDA
+# ══════════════════════════════════════════════════
++ label {
+    id                = "__welcome__"
+    left              = 50%-200
+    top               = 178
+    width             = 400
+    height            = 48
+    align             = "center"
+    font              = "regular"
+    color             = "#4466aa"
+    text              = "Bienvenido a StryxOS 1.0 (Glaukopis)"
+}
+
+
+# ══════════════════════════════════════════════════
+#  VERSIÓN — esquina inferior derecha
+# ══════════════════════════════════════════════════
++ label {
+    id                = "__version__"
+    left              = 50%+120
+    top               = 100%-30
+    width             = 180
+    height            = 48
+    align             = "right"
+    font              = "small"
+    color             = "#334466"
+    text              = "Install With Clarity, Fly With Purpose"
+}

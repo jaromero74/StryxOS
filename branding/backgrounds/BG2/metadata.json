@@ -1,0 +1,9 @@
+{
+    "KPlugin": {
+        "Authors": [{"Name": "StryxOS Team"}],
+        "Id": "BG2",
+        "License": "CC-BY-SA-4.0",
+        "Name": "StryxOS BG2",
+        "Version": "1.0"
+    }
+}

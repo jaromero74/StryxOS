@@ -1,0 +1,21 @@
+{
+  "policies": {
+    "DisablePocket": true,
+    "DisableTelemetry": true,
+    "DisableFirefoxStudies": true,
+    "DisableFirefoxAccounts": false,
+    "OverrideFirstRunPage": "file:///usr/share/stryxos/welcome.html",
+    "OverridePostUpdatePage": "",
+    "NewTabPage": false,
+    "SearchBar": "unified",
+    "Homepage": {
+      "URL": "file:///usr/share/stryxos/welcome.html",
+      "Locked": false,
+      "StartPage": "homepage"
+    },
+    "Extensions": {
+      "Install": [],
+      "Uninstall": ["firefox@getpocket.com"]
+    }
+  }
+}

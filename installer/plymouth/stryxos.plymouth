@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=StryxOS
+Description=Bootsplash oficial de StryxOS
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/stryxos/images
+ScriptFile=/usr/share/plymouth/themes/stryxos/stryxos.script
