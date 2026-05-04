@@ -136,6 +136,7 @@ StryxOS es software libre distribuido bajo los términos de la licencia **GPL v3
 </div>
 
 
+
 ## 📬 Contacto
 
 ¿Preguntas, sugerencias o quiere contribuir al proyecto?
