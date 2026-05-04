@@ -1,42 +1,136 @@
 # StryxOS 🦉
 
-Desde Panamá para el mundo Open Source.
-StryxOS es una distro basada en Debian 13 con KDE Plasma SDDM, el propósito de mi proyecto es el de ofrecerle una distro sencilla de manejar sin tantas complicaciones para los usuarios principiantes sobre todo y también para los usuarios intermedios. En StryxOS no encontrarán software innecesario que termina abrumando al usuario. La idea es que aprendan con confianza. Inspirada en la sabiduría y el estilo de su mascota oficial, **Lumo**, StryxOS combina eficiencia técnica con identidad gráfica.
+> *"Instale con claridad, vuele con propósito"*
 
+**Desde Panamá para el mundo Open Source.**
+
+StryxOS es una distribución Linux basada en **Debian 13 Trixie** con entorno de escritorio **KDE Plasma**, diseñada para ofrecer una experiencia sencilla, limpia y sin complicaciones. Su propósito es ser la puerta de entrada ideal para usuarios que dan sus primeros pasos en Linux, sin renunciar a la potencia que los usuarios intermedios necesitan.
+
+En StryxOS no encontrará software innecesario que abrume al usuario. La filosofía es simple: **el usuario decide, el sistema respeta**. Inspirada en la sabiduría y el estilo de su mascota oficial, **Lumo**, StryxOS combina eficiencia técnica con identidad gráfica propia.
+
+---
 
 ## ✨ Características principales
 
-- 🔹 Basado en Debian 13 minimalista
-- 🔹 Entorno KDE Plasma SDDM, interfaz moderna y familiar para quien viene de Windows
-- 🔹 Integración de arte ASCII en terminal con Fastfetch
-- 🔹 Instalador gráfico Calamares tematizado
-- 🔹 Splash de arranque con branding propio (Plymouth)
-- 🔹 Ideal para usuarios que tienen el primer contacto con Linux sin tantas complicaciones      y también para revitalizar o dar una segunda oportunidad a equipos que no reúnen los       requisitos de hardware para los sistemas operativos a partir de Windows 11.
+- 🐧 Basada en **Debian 13 Trixie** — estabilidad y seguridad desde el primer día
+- 🖥️ Entorno **KDE Plasma** con SDDM — interfaz moderna y familiar para quien viene de Windows
+- 🦉 Identidad visual propia — tema SDDM, bootsplash Plymouth y fondos exclusivos
+- 🌐 **Firefox-ESR** integrado nativamente con Plasma (selectores de archivos, WebRender)
+- 🔒 Políticas de Firefox preconfiguradas — sin Pocket, sin telemetría, sin distracciones
+- 📄 Guía de bienvenida propia que abre al primer inicio de Firefox
+- 🧹 Sistema limpio — sin Akonadi, sin ibus, sin bloat innecesario
+- 💿 Solo arquitectura **amd64** (64 bits)
+- 🎨 9 fondos de pantalla exclusivos con temática de búho
+- 💡 Ideal para el primer contacto con Linux y para revitalizar equipos que no cumplen los requisitos de Windows 11
 
-## 🧱 Estructura del proyecto
+---
 
+## 📦 Aplicaciones incluidas
+
+| Aplicación | Función |
+|---|---|
+| Dolphin | Gestor de archivos |
+| Konsole | Terminal del sistema |
+| Discover | Tienda de software |
+| Gestor de Particiones | Administración de discos |
+| Kate / KWrite | Editores de texto |
+| VLC | Reproductor multimedia |
+| Firefox-ESR | Navegador web integrado con Plasma |
+
+> StryxOS **no incluye** suite ofimática por defecto. El usuario elige la que prefiera desde Discover: LibreOffice, OnlyOffice, WPS Office o FreeOffice.
+
+---
+
+## 🔧 Optimizaciones técnicas
+
+- Repositorios Debian Trixie con `main contrib non-free non-free-firmware`
+- `xdg-desktop-portal-kde` para integración nativa de Firefox con Plasma
+- WebRender habilitado por GPU para reproducción de video eficiente
+- `policies.json` de Firefox preconfigurado a nivel de sistema
+- Akonadi y suite PIM de KDE eliminados (ahorro de 200-500 MB de RAM)
+- ibus removido (redundante en KDE con teclado estándar)
+
+---
+
+## 🗂️ Estructura del proyecto
+
+```
 ~/StryxOS/
 ├── branding/
-│   ├── mascot/           # Ilustraciones y versiones de Lumo
-│   ├── backgrounds/      # Login, escritorio, splash
-│   └── ascii/            # Arte para Fastfetch, terminal, etc.
+│   ├── mascot/          # Ilustraciones y versiones de Lumo
+│   ├── backgrounds/     # Fondos de pantalla exclusivos
+│   └── ascii/           # Arte para Fastfetch y terminal
 ├── installer/
-│   ├── calamares/        # Configuración y temas
-│   └── plymouth/         # Splash de arranque
+│   ├── calamares/       # Configuración y temas del instalador
+│   └── plymouth/        # Splash de arranque
 ├── system/
-│   ├── packages/         # Lista de paquetes base
-│   ├── scripts/          # Automatización de instalación
-│   └── configs/          # Archivos de configuración (KDE, SDDM, etc.)
+│   ├── packages/        # Lista de paquetes base
+│   ├── scripts/         # Automatización de instalación
+│   └── configs/         # Archivos de configuración (KDE, SDDM, Firefox)
 ├── docs/
-│   ├── README.md         # Documentación principal
-│   ├── changelog.md      # Registro de cambios
-│   └── backup-strategy.md # Estrategia de respaldo
-└── iso/
-    └── build/            # Archivos para generar la ISO final
+│   ├── README.md        # Documentación principal
+│   ├── changelog.md     # Registro de cambios
+│   └── backup-strategy.md
+└── build/               # Archivos para generar la ISO final
+```
+
+---
+
+## 🚀 Estado del proyecto
+
+| Componente | Estado |
+|---|---|
+| Base Debian 13 Trixie | ✅ Funcionando |
+| KDE Plasma + SDDM | ✅ Configurado |
+| Tema SDDM personalizado | ✅ Completado |
+| Bootsplash Plymouth | ✅ Activo |
+| Fondos de pantalla | ✅ 9 fondos exclusivos |
+| Firefox-ESR integrado | ✅ Completado |
+| Políticas Firefox | ✅ Activas |
+| Guía de bienvenida | ✅ Completada |
+| Limpieza de bloat | ✅ Completada |
+| Construcción de ISO | 🔄 En desarrollo |
+
+---
 
 ## 🤝 Cómo contribuir
 
 1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/jaromero74/StryxOS.git
-   cd StryxOS
+```bash
+git clone https://github.com/jaromero74/StryxOS.git
+cd StryxOS
+```
+
+2. Crea una rama para tu contribución:
+```bash
+git checkout -b mi-contribucion
+```
+
+3. Envía un Pull Request describiendo los cambios.
+
+---
+
+## 📋 Requisitos mínimos de hardware
+
+| Componente | Mínimo |
+|---|---|
+| Arquitectura | x86_64 (64 bits) |
+| RAM | 2 GB |
+| Almacenamiento | 20 GB |
+| Procesador | Dual-core 1.5 GHz |
+
+---
+
+## 📜 Licencia
+
+StryxOS es software libre distribuido bajo los términos de la licencia **GPL v3**.
+
+---
+
+<div align="center">
+
+**StryxOS** — Distro Linux 100% panameño 🦉
+
+*Basado en Debian — estabilidad y seguridad desde el primer día*
+
+</div>
