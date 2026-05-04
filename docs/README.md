@@ -134,3 +134,10 @@ StryxOS es software libre distribuido bajo los términos de la licencia **GPL v3
 *Basado en Debian — estabilidad y seguridad desde el primer día*
 
 </div>
+
+
+## 📬 Contacto
+
+¿Preguntas, sugerencias o quiere contribuir al proyecto?
+
+📧 stryxoslinux@gmail.com
