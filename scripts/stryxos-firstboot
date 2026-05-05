@@ -1,0 +1,180 @@
+#!/bin/bash
+# =============================================================================
+# StryxOS — Script de primer arranque (firstboot)
+# Versión: 1.0
+# Descripción: Aplica configuraciones base del sistema silenciosamente.
+#              Se ejecuta una sola vez tras la instalación con Calamares.
+# =============================================================================
+
+set -euo pipefail
+
+# --- Constantes --------------------------------------------------------------
+FLAG_DIR="/var/lib/stryxos"
+FLAG_FILE="${FLAG_DIR}/.firstboot-done"
+LOG_FILE="/var/log/stryxos-firstboot.log"
+STRYXOS_SHARE="/usr/share/stryxos"
+
+# --- Logging -----------------------------------------------------------------
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "$LOG_FILE"
+}
+
+log "=============================="
+log "StryxOS firstboot iniciado"
+log "=============================="
+
+# --- Verificar si ya se ejecutó ----------------------------------------------
+if [[ -f "$FLAG_FILE" ]]; then
+    log "Firstboot ya ejecutado anteriormente. Saliendo."
+    exit 0
+fi
+
+# --- Detectar usuario principal (creado por Calamares) ----------------------
+MAIN_USER=""
+while IFS=: read -r username _ uid _ _ home _; do
+    if [[ "$uid" -ge 1000 && "$uid" -lt 65534 && -d "$home" ]]; then
+        MAIN_USER="$username"
+        MAIN_HOME="$home"
+        break
+    fi
+done < /etc/passwd
+
+if [[ -z "$MAIN_USER" ]]; then
+    log "ERROR: No se encontró usuario principal. Abortando."
+    exit 1
+fi
+
+log "Usuario principal detectado: ${MAIN_USER} (home: ${MAIN_HOME})"
+
+# =============================================================================
+# SECCIÓN 1 — Firefox-ESR: asegurar policies.json
+# =============================================================================
+log "Aplicando políticas de Firefox-ESR..."
+
+FIREFOX_POLICIES_DIR="/etc/firefox/policies"
+FIREFOX_POLICIES_SRC="${STRYXOS_SHARE}/firefox/policies.json"
+
+if [[ -f "$FIREFOX_POLICIES_SRC" ]]; then
+    mkdir -p "$FIREFOX_POLICIES_DIR"
+    cp "$FIREFOX_POLICIES_SRC" "${FIREFOX_POLICIES_DIR}/policies.json"
+    chmod 644 "${FIREFOX_POLICIES_DIR}/policies.json"
+    log "policies.json aplicado correctamente."
+else
+    log "AVISO: No se encontró policies.json en ${FIREFOX_POLICIES_SRC}. Omitiendo."
+fi
+
+# =============================================================================
+# SECCIÓN 2 — Fastfetch: configuración para usuario y root
+# =============================================================================
+log "Configurando Fastfetch..."
+
+FASTFETCH_CONFIG_SRC="${STRYXOS_SHARE}/fastfetch/config.jsonc"
+
+apply_fastfetch_config() {
+    local target_home="$1"
+    local target_user="$2"
+    local config_dir="${target_home}/.config/fastfetch"
+
+    if [[ -f "$FASTFETCH_CONFIG_SRC" ]]; then
+        mkdir -p "$config_dir"
+        cp "$FASTFETCH_CONFIG_SRC" "${config_dir}/config.jsonc"
+        chown -R "${target_user}:${target_user}" "$config_dir"
+        log "Fastfetch configurado para: ${target_user}"
+    else
+        log "AVISO: No se encontró config de Fastfetch en ${FASTFETCH_CONFIG_SRC}. Omitiendo."
+    fi
+}
+
+apply_fastfetch_config "$MAIN_HOME" "$MAIN_USER"
+apply_fastfetch_config "/root" "root"
+
+# =============================================================================
+# SECCIÓN 3 — KDE Plasma: wallpaper y configuración base
+# =============================================================================
+log "Aplicando configuración de KDE Plasma..."
+
+WALLPAPER_SRC="${STRYXOS_SHARE}/wallpapers"
+PLASMA_CONFIG_DIR="${MAIN_HOME}/.config"
+
+# Asegurar directorios de configuración KDE
+mkdir -p "${PLASMA_CONFIG_DIR}"
+
+# Configurar kscreenlockerrc (pantalla de bloqueo con wallpaper StryxOS)
+KSCREENLOCKER_CONF="${PLASMA_CONFIG_DIR}/kscreenlockerrc"
+if [[ -d "$WALLPAPER_SRC" ]]; then
+    # Usar el primer wallpaper disponible como fondo de pantalla de bloqueo
+    FIRST_WALLPAPER=$(find "$WALLPAPER_SRC" -maxdepth 1 \
+        \( -name "*.jpg" -o -name "*.png" \) | sort | head -n 1)
+
+    if [[ -n "$FIRST_WALLPAPER" ]]; then
+        cat > "$KSCREENLOCKER_CONF" <<EOF
+[Greeter][Wallpaper][org.kde.image][General]
+Image=${FIRST_WALLPAPER}
+EOF
+        chown "${MAIN_USER}:${MAIN_USER}" "$KSCREENLOCKER_CONF"
+        log "Fondo de pantalla de bloqueo configurado: ${FIRST_WALLPAPER}"
+    fi
+fi
+
+# Configurar plasmarc: deshabilitar splash de KDE (StryxOS usa Plymouth)
+PLASMARC="${PLASMA_CONFIG_DIR}/plasmarc"
+if [[ ! -f "$PLASMARC" ]]; then
+    cat > "$PLASMARC" <<EOF
+[KSplash]
+Engine=none
+Theme=none
+EOF
+    chown "${MAIN_USER}:${MAIN_USER}" "$PLASMARC"
+    log "KSplash deshabilitado (Plymouth activo)."
+fi
+
+# =============================================================================
+# SECCIÓN 4 — Shell: mensaje de bienvenida en .bashrc (usuario y root)
+# =============================================================================
+log "Configurando .bashrc con Fastfetch..."
+
+BASHRC_SNIPPET='
+# StryxOS — mostrar info del sistema al abrir terminal
+if command -v fastfetch &>/dev/null; then
+    fastfetch
+fi
+'
+
+apply_bashrc_snippet() {
+    local target_bashrc="$1"
+    local target_user="$2"
+
+    if [[ -f "$target_bashrc" ]]; then
+        if ! grep -q "StryxOS" "$target_bashrc"; then
+            echo "$BASHRC_SNIPPET" >> "$target_bashrc"
+            chown "${target_user}:${target_user}" "$target_bashrc"
+            log ".bashrc actualizado para: ${target_user}"
+        fi
+    else
+        echo "$BASHRC_SNIPPET" > "$target_bashrc"
+        chown "${target_user}:${target_user}" "$target_bashrc"
+        log ".bashrc creado para: ${target_user}"
+    fi
+}
+
+apply_bashrc_snippet "${MAIN_HOME}/.bashrc" "$MAIN_USER"
+apply_bashrc_snippet "/root/.bashrc" "root"
+
+# =============================================================================
+# SECCIÓN 5 — Permisos finales
+# =============================================================================
+log "Ajustando permisos del directorio home..."
+chown -R "${MAIN_USER}:${MAIN_USER}" "${MAIN_HOME}/.config" 2>/dev/null || true
+
+# =============================================================================
+# FINALIZACIÓN — Crear flag para no volver a ejecutar
+# =============================================================================
+mkdir -p "$FLAG_DIR"
+touch "$FLAG_FILE"
+chmod 444 "$FLAG_FILE"
+
+log "=============================="
+log "StryxOS firstboot completado."
+log "=============================="
+
+exit 0

@@ -1,0 +1,26 @@
+# =============================================================================
+# StryxOS — Unidad systemd de primer arranque
+# Archivo: /etc/systemd/system/stryxos-firstboot.service
+# =============================================================================
+
+[Unit]
+Description=StryxOS First Boot Configuration
+Documentation=https://github.com/jaromero74/StryxOS
+# Ejecutar después de que el sistema de archivos esté montado
+# y antes de que el usuario pueda iniciar sesión
+After=local-fs.target systemd-user-sessions.service
+Before=display-manager.service
+# Solo ejecutar si el flag de firstboot NO existe
+ConditionPathExists=!/var/lib/stryxos/.firstboot-done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/stryxos-firstboot
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=stryxos-firstboot
+# El script gestiona sus propios errores; no detener el arranque si falla
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
