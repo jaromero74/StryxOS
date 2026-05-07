@@ -1,0 +1,48 @@
+# =============================================================================
+# StryxOS — Calamares Branding Configuration
+# Archivo: /usr/share/calamares/branding/stryxos/branding.desc
+# =============================================================================
+
+componentName: stryxos
+
+# --- Información del producto ------------------------------------------------
+strings:
+    productName:          "StryxOS"
+    shortProductName:     "StryxOS"
+    version:              "1.0"
+    shortVersion:         "1.0"
+    versionedName:        "StryxOS 1.0"
+    shortVersionedName:   "StryxOS 1.0"
+    bootloaderEntryName:  "StryxOS"
+    productUrl:           "https://github.com/jaromero74/StryxOS"
+    supportUrl:           "mailto:stryxoslinux@gmail.com"
+    bugReportUrl:         "https://github.com/jaromero74/StryxOS/issues"
+    releaseNotesUrl:      "https://github.com/jaromero74/StryxOS/releases"
+
+# --- Imágenes ----------------------------------------------------------------
+images:
+    productLogo:          "stryx-launcher.png"
+    productIcon:          "stryx-launcher.png"
+    productWelcome:       "stryxos-laptop.png"
+
+# --- Diapositivas durante la instalación ------------------------------------
+slideshow:                "show.qml"
+slideshowAPI:             2
+
+# --- Colores de la interfaz --------------------------------------------------
+style:
+    # Sidebar izquierda
+    sidebarBackground:    "#111827"
+    sidebarText:          "#e5e7eb"
+    sidebarTextSelect:    "#ffffff"
+    sidebarTextHighlight: "#3b82f6"
+
+    # Fondo principal
+    backgroundColor:      "#1f2937"
+
+    # Texto general
+    textColor:            "#f9fafb"
+
+    # Botones
+    highlightColor:       "#3b82f6"
+    highlightTextColor:   "#ffffff"
