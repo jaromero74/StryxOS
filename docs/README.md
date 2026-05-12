@@ -47,7 +47,7 @@ En StryxOS no encontrará software innecesario que abrume al usuario. La filosof
 - `xdg-desktop-portal-kde` para integración nativa de Firefox con Plasma
 - WebRender habilitado por GPU para reproducción de video eficiente
 - `policies.json` de Firefox preconfigurado a nivel de sistema
-- Akonadi y suite PIM de KDE eliminados (ahorro de 200-500 MB de RAM)
+- Akonadi y suite PIM de KDE eliminados (ahorro de 200-500 MB de espacio en almacenamiento)
 - ibus removido (redundante en KDE con teclado estándar)
 
 ---
