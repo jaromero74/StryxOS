@@ -8,3 +8,42 @@ bg_sprite = Sprite(bg_scaled);
 bg_sprite.SetX(0);
 bg_sprite.SetY(0);
 bg_sprite.SetZ(-100);
+
+// --- Spinner horizontal centrado bajo "ryx" ---
+num_dots        = 5;
+dot_size        = 16;
+dot_spacing     = 28;
+animation_speed = 5;
+tick            = 0;
+active_dot      = 0;
+
+total_width      = (num_dots - 1) * dot_spacing;
+spinner_center_x = screen_width  * 0.55;
+spinner_y        = screen_height * 0.67;
+
+dot_image  = Image("dot.png");
+dot_scaled = dot_image.Scale(dot_size, dot_size);
+
+for (i = 0; i < num_dots; i++) {
+    dot_sprites[i] = Sprite(dot_scaled);
+    dot_sprites[i].SetX(spinner_center_x - (total_width / 2) + (i * dot_spacing) - (dot_size / 2));
+    dot_sprites[i].SetY(spinner_y - (dot_size / 2));
+    dot_sprites[i].SetZ(10);
+    dot_sprites[i].SetOpacity(0.35);
+}
+
+fun refresh_callback() {
+    tick++;
+    if (tick >= animation_speed) {
+        tick = 0;
+        for (i = 0; i < num_dots; i++) {
+            dot_sprites[i].SetOpacity(0.35);
+        }
+        dot_sprites[active_dot].SetOpacity(1.0);
+        dot_sprites[(active_dot + 1) % num_dots].SetOpacity(0.65);
+        dot_sprites[(active_dot + num_dots - 1) % num_dots].SetOpacity(0.5);
+        active_dot = (active_dot + 1) % num_dots;
+    }
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);
