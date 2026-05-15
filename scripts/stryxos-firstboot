@@ -167,6 +167,30 @@ log "Ajustando permisos del directorio home..."
 chown -R "${MAIN_USER}:${MAIN_USER}" "${MAIN_HOME}/.config" 2>/dev/null || true
 
 # =============================================================================
+# SECCIÓN 6 — Logo de "Acerca de este sistema"
+# =============================================================================
+log "Instalando logo de StryxOS en Acerca de este sistema..."
+
+LOGO_SRC="${STRYXOS_SHARE}/branding/stryx-logo.png"
+KCM_CONF_SRC="${STRYXOS_SHARE}/configs/kcm-about-distrorc"
+
+if [[ -f "$LOGO_SRC" ]]; then
+    cp "$LOGO_SRC" /usr/share/pixmaps/stryx-logo.png
+    chmod 644 /usr/share/pixmaps/stryx-logo.png
+    log "Logo instalado en /usr/share/pixmaps/stryx-logo.png"
+else
+    log "AVISO: No se encontró el logo en ${LOGO_SRC}. Omitiendo."
+fi
+
+if [[ -f "$KCM_CONF_SRC" ]]; then
+    cp "$KCM_CONF_SRC" /etc/xdg/kcm-about-distrorc
+    chmod 644 /etc/xdg/kcm-about-distrorc
+    log "kcm-about-distrorc instalado correctamente."
+else
+    log "AVISO: No se encontró kcm-about-distrorc en ${KCM_CONF_SRC}. Omitiendo."
+fi
+
+# =============================================================================
 # FINALIZACIÓN — Crear flag para no volver a ejecutar
 # =============================================================================
 mkdir -p "$FLAG_DIR"
