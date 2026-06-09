@@ -52,7 +52,17 @@ En StryxOS no encontrará software innecesario que abrume al usuario. La filosof
 
 ---
 
+## ⬇️ Descarga
+
+**StryxOS 1.0** (amd64) ya está disponible:
+
+📥 **[Descargar ISO desde Internet Archive](https://archive.org/download/stryx-os-amd-64-2026-06-07-1933/StryxOS_amd64_2026-06-07_1933.iso)** (~2.8 GB)
+
+🔍 Verifica la integridad de tu descarga:
+
 ## 🗂️ Estructura del proyecto
+
+---
 
 ```
 ~/StryxOS/
