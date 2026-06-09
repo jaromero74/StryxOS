@@ -51,18 +51,14 @@ En StryxOS no encontrará software innecesario que abrume al usuario. La filosof
 - ibus removido (redundante en KDE con teclado estándar)
 
 ---
-
 ## ⬇️ Descarga
 
 **StryxOS 1.0** (amd64) ya está disponible:
 
-📥 **[Descargar ISO desde Internet Archive](https://archive.org/download/stryx-os-amd-64-2026-06-07-1933/StryxOS_amd64_2026-06-07_1933.iso)** (~2.8 GB)
+🗄️ **[Descargar ISO desde Internet Archive](https://archive.org/download/stryx-os-amd-64-2026-06-07-1933/StryxOS_amd64_2026-06-07_1933.iso)** (~2.8 GB)
 
 🔍 Verifica la integridad de tu descarga:
 
----
-
-## 🗂️ Estructura del proyecto
 ```bash
 sha256sum StryxOS_amd64_2026-06-07_1933.iso
 ```
@@ -72,9 +68,10 @@ Debe coincidir con:
 `76a8d0106011693549a48c633a7b82f6a0af3bcc17e6c1387dc9042015d3b120`
 
 🗂️ [Página del proyecto en Internet Archive](https://archive.org/details/stryx-os-amd-64-2026-06-07-1933)
----
 
 ---
+
+## 📂 Estructura del proyecto
 
 ```
 ~/StryxOS/
