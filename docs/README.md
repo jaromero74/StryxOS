@@ -61,7 +61,15 @@ En StryxOS no encontrará software innecesario que abrume al usuario. La filosof
 🔍 Verifica la integridad de tu descarga:
 
 ## 🗂️ Estructura del proyecto
+```bash
+sha256sum StryxOS_amd64_2026-06-07_1933.iso
+```
 
+Debe coincidir con:
+
+`76a8d0106011693549a48c633a7b82f6a0af3bcc17e6c1387dc9042015d3b120`
+
+🗂️ [Página del proyecto en Internet Archive](https://archive.org/details/stryx-os-amd-64-2026-06-07-1933)
 ---
 
 ```
