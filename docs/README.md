@@ -103,12 +103,11 @@ Debe coincidir con:
 | KDE Plasma + SDDM | ✅ Configurado |
 | Tema SDDM personalizado | ✅ Completado |
 | Bootsplash Plymouth | ✅ Activo |
-| Fondos de pantalla | ✅ 9 fondos exclusivos |
+| Fondos de pantalla | ✅ 15 fondos exclusivos |
 | Firefox-ESR integrado | ✅ Completado |
 | Políticas Firefox | ✅ Activas |
 | Guía de bienvenida | ✅ Completada |
 | Limpieza de bloat | ✅ Completada |
-| Construcción de ISO | 🔄 En desarrollo |
 
 ---
 
