@@ -20,7 +20,7 @@ En StryxOS no encontrará software innecesario que abrume al usuario. La filosof
 - 📄 Guía de bienvenida propia que abre al primer inicio de Firefox
 - 🧹 Sistema limpio — sin Akonadi, sin ibus, sin bloat innecesario
 - 💿 Solo arquitectura **amd64** (64 bits)
-- 🎨 9 fondos de pantalla exclusivos con temática de búho
+- 🎨 15 fondos de pantalla exclusivos 
 - 💡 Ideal para el primer contacto con Linux y para revitalizar equipos que no cumplen los requisitos de Windows 11
 
 ---
