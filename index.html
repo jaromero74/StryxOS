@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StryxOS — Instala con claridad, vuela con propósito</title>
+<meta name="description" content="StryxOS es una distro Linux derivada de Debian 13 (Trixie), pensada para quienes tienen su primer contacto con Linux, sin sacrificar potencia para usuarios intermedios.">
+<link rel="icon" href="img/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #ffffff;
+    --ink-soft: rgba(255,255,255,0.82);
+    --ink-muted: rgba(255,255,255,0.62);
+    --panel-dark: rgba(4, 18, 46, 0.55);
+    --panel-darker: rgba(3, 12, 34, 0.72);
+    --line: rgba(255,255,255,0.18);
+    --accent: #bfe4ff;
+    --body: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  body {
+    font-family: var(--body);
+    color: var(--ink);
+    line-height: 1.65;
+    background: #0d3ea8;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 15% 0%, rgba(160,215,255,0.55), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 100% 20%, rgba(60,140,240,0.5), transparent 60%),
+      radial-gradient(ellipse 90% 70% at 30% 100%, rgba(20,70,180,0.65), transparent 65%),
+      linear-gradient(160deg, #7fc4ff 0%, #2f79e6 28%, #1c4fc4 55%, #0d3ea8 78%, #082a78 100%);
+    background-attachment: fixed;
+  }
+
+  a { color: inherit; }
+  ::selection { background: var(--accent); color: #04152f; }
+
+  img { max-width: 100%; display: block; }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+
+  /* ---------- Nav ---------- */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 6vw;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+  }
+  .brand img { width: 42px; height: 42px; }
+
+  .nav-links {
+    display: flex;
+    gap: 34px;
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+  .nav-links a { text-decoration: none; opacity: 0.85; transition: opacity 0.2s ease; }
+  .nav-links a:hover { opacity: 1; }
+
+  @media (max-width: 760px) { .nav-links { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 40px 6vw 90px;
+  }
+
+  .hero-grid {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+  }
+
+  h1.tagline {
+    font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 26px;
+  }
+  h1.tagline em { font-style: italic; color: var(--accent); }
+
+  .hero p {
+    font-weight: 600;
+    font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    max-width: 620px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 15px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-top: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary {
+    background: #ffffff;
+    color: #0d3ea8;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  }
+  .btn-ghost {
+    border: 1.5px solid rgba(255,255,255,0.5);
+    color: #fff;
+  }
+
+  .hero-visual img {
+    width: 100%;
+    filter: drop-shadow(0 35px 55px rgba(0,10,40,0.5));
+  }
+
+  /* ---------- Sections ---------- */
+  section { padding: 70px 6vw; }
+
+  .panel {
+    background: var(--panel-dark);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 44px clamp(20px, 4vw, 48px);
+  }
+
+  .section-title {
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    font-weight: 800;
+    margin-bottom: 26px;
+  }
+
+  /* ---------- Integrity / terminal ---------- */
+  .integrity p { color: var(--ink-soft); font-weight: 600; margin-bottom: 18px; }
+  .hash-block {
+    font-family: var(--mono);
+    background: rgba(0,0,0,0.35);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 22px;
+    font-size: 0.88rem;
+    overflow-x: auto;
+  }
+  .hash-block .k { color: var(--accent); }
+  .hash-block .l { white-space: pre; margin-bottom: 8px; }
+  .hash-block .l:last-child { margin-bottom: 0; word-break: break-all; white-space: normal; }
+
+  /* ---------- Features ---------- */
+  .feature-list { list-style: none; margin-top: 30px; display: flex; flex-direction: column; gap: 20px; }
+  .feature-list li {
+    display: flex;
+    gap: 16px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .feature-list li:last-child { border-bottom: none; padding-bottom: 0; }
+  .feature-list b { color: #fff; }
+  .feature-list .dot {
+    flex-shrink: 0;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 7px;
+  }
+
+  .office-note {
+    margin-top: 32px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+  .office-note .apps { margin-top: 10px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; font-weight: 700; color: #fff; }
+  .office-note .apps span {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--line);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+  }
+
+  /* ---------- Hardware ---------- */
+  .hw-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin-top: 28px;
+  }
+  .hw-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px;
+  }
+  .hw-card h4 {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .hw-card .min { font-weight: 700; font-size: 1.05rem; }
+  .hw-card .rec { font-weight: 600; color: var(--ink-muted); font-size: 0.9rem; margin-top: 4px; }
+
+  /* ---------- Gallery ---------- */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 30px;
+  }
+  .gallery-grid a {
+    display: block;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 16px 40px rgba(0,10,40,0.35);
+    transition: transform 0.2s ease;
+  }
+  .gallery-grid a:hover { transform: translateY(-4px); }
+  .gallery-grid img { aspect-ratio: 16/10; object-fit: cover; width: 100%; }
+
+  /* ---------- Contact ---------- */
+  .contact { text-align: left; }
+  .contact p { font-weight: 600; color: var(--ink-soft); margin-bottom: 10px; }
+  .contact a.mail {
+    display: inline-block;
+    margin-top: 6px;
+    font-weight: 700;
+    color: #ffe066;
+    text-decoration: none;
+    font-size: 1.05rem;
+  }
+  .contact a.mail:hover { text-decoration: underline; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 60px 6vw 50px;
+    text-align: center;
+  }
+  footer img { width: 64px; height: 64px; margin: 0 auto 22px; }
+  footer .lic { font-weight: 700; font-size: 1.02rem; }
+  footer .base { font-weight: 600; color: var(--ink-soft); margin-top: 6px; }
+  footer .copy { margin-top: 30px; font-weight: 600; color: var(--ink-muted); font-size: 0.88rem; }
+
+  @media (max-width: 640px) {
+    .panel { padding: 32px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand"><img src="img/logo.png" alt="StryxOS"> StryxOS</div>
+  <div class="nav-links">
+    <a href="#about">Acerca</a>
+    <a href="#features">Características</a>
+    <a href="#gallery">Galería</a>
+    <a href="#contact">Contacto</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-grid">
+    <div>
+      <h1 class="tagline">"Instala con claridad,<br><em>vuela con propósito</em>"</h1>
+      <p id="about">StryxOS es una distro Linux derivada de Debian 13 (Trixie), creada para ofrecer una experiencia limpia, sencilla y sin complicaciones para usuarios que tienen primer contacto con Linux, sin sacrificar la potencia que exigen los usuarios intermedios.</p>
+      <p>Desarrollado como reemplazo amigable de los costosos sistemas operativos de código cerrado que existen actualmente. Si bien puede instalarse permanentemente en un disco duro, se distribuye como una USB Live, lo que permite ejecutarla sin realizar cambios localmente.</p>
+      <p>Es útil también para revitalizar equipos, para que tengan una segunda oportunidad, que no reúnen los requisitos de hardware para Windows 11.</p>
+      <a class="btn btn-primary" href="https://archive.org/download/stryx-os-amd-64-2026-06-07-1933/StryxOS_amd64_2026-06-07_1933.iso">⬇ Descargar la ISO (2.8 GB)</a>
+    </div>
+    <div class="hero-visual">
+      <img src="img/laptop.png" alt="Laptop mostrando el logo de StryxOS en pantalla">
+    </div>
+  </div>
+</header>
+
+<section id="download">
+  <div class="wrap panel integrity">
+    <h2 class="section-title">Integridad del archivo (SHA-256)</h2>
+    <p>Después de descargar el ISO, puedes validar que el archivo vino completo y sin corrupción usando el terminal de tu sistema Linux actual con el siguiente comando:</p>
+    <div class="hash-block">
+      <div class="l"><span class="k">$</span> sha256sum StryxOS_amd64_2026-06-07_1933.iso</div>
+      <div class="l"><span class="k">Debe coincidir con:</span> 76a8d0106011693549a48c633a7b82f6a0af3bcc17e6c1387dc9042015d3b120</div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap panel">
+    <h2 class="section-title">Características principales</h2>
+    <ul class="feature-list">
+      <li><span class="dot"></span><span><b>Base robusta:</b> construida directamente sobre la rama de pruebas de Debian 13 (Trixie).</span></li>
+      <li><span class="dot"></span><span><b>Entorno visual:</b> implementa el escritorio KDE Plasma junto al gestor de pantalla SDDM — interfaz moderna y familiar para quien viene de Windows.</span></li>
+      <li><span class="dot"></span><span><b>Filosofía minimalista:</b> evita el software innecesario (bloatware) para que el usuario controle lo que se instala.</span></li>
+      <li><span class="dot"></span><span><b>Navegación segura:</b> incluye Firefox ESR integrado con el ecosistema de Plasma y políticas preconfiguradas enfocadas en la privacidad — sin Pocket, sin telemetría, sin distracciones.</span></li>
+      <li><span class="dot"></span><span><b>Enfoque instructivo:</b> el usuario crece con StryxOS, no lucha contra ella.</span></li>
+    </ul>
+    <div class="office-note">
+      StryxOS no incluye suite ofimática por defecto. El usuario elige la que prefiera desde Discover:
+      <div class="apps">
+        <span>LibreOffice</span><span>OnlyOffice</span><span>WPSOffice</span><span>FreeOffice</span>
+      </div>
+      <p style="margin-top:14px; font-weight:600;">Todas son gratuitas y compatibles con documentos de Microsoft Office.</p>
+    </div>
+  </div>
+</section>
+
+<section id="hardware">
+  <div class="wrap panel">
+    <h2 class="section-title">Requisitos de hardware</h2>
+    <div class="hw-grid">
+      <div class="hw-card">
+        <h4>Procesador (CPU)</h4>
+        <div class="min">Mínimo 2 núcleos</div>
+        <div class="rec">4 núcleos o más (recomendado)</div>
+      </div>
+      <div class="hw-card">
+        <h4>RAM</h4>
+        <div class="min">4 GB mínimo</div>
+        <div class="rec">8 GB o más (recomendado)</div>
+      </div>
+      <div class="hw-card">
+        <h4>Almacenamiento</h4>
+        <div class="min">20 GB o más</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <h2 class="section-title">Gallery</h2>
+    <div class="gallery-grid">
+      <a href="img/gallery-1.jpg" target="_blank"><img src="img/gallery-1.jpg" alt="Escritorio de StryxOS con fondo azul"></a>
+      <a href="img/gallery-2.jpg" target="_blank"><img src="img/gallery-2.jpg" alt="Terminal con fastfetch y logo del búho en ASCII"></a>
+      <a href="img/gallery-3.jpg" target="_blank"><img src="img/gallery-3.jpg" alt="Discover y Preferencias del sistema en StryxOS"></a>
+      <a href="img/gallery-4.jpg" target="_blank"><img src="img/gallery-4.jpg" alt="Firefox ESR corriendo en StryxOS"></a>
+      <a href="img/gallery-5.jpg" target="_blank"><img src="img/gallery-5.jpg" alt="Panel Acerca de este sistema mostrando StryxOS GNU/Linux 1.0"></a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap panel contact">
+    <h2 class="section-title">Contacto</h2>
+    <p>Para preguntas, sugerencias o si quiere contribuir al proyecto:</p>
+    <a class="mail" href="mailto:stryxoslinux@gmail.com">stryxoslinux@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  <img src="img/logo.png" alt="StryxOS">
+  <div class="lic">StryxOS es software libre distribuido bajo los términos de la licencia GPL v3</div>
+  <div class="base">Basado en Debian — estabilidad y seguridad desde el primer día</div>
+  <div class="copy">© 2026 StryxOS Team | Panamá</div>
+</footer>
+
+</body>
+</html>
