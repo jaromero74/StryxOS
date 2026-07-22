@@ -1,6 +1,6 @@
 # StryxOS 🦉
 
-> *"Instale con claridad, vuela con propósito"*
+> *"Instala con claridad, vuela con propósito"*
 
 **Desde Panamá para el mundo Open Source.**
 
